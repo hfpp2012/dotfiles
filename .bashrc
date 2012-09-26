@@ -109,7 +109,10 @@ fi
 
 export PS1="\W $ "
 source ~/.rvm/scripts/rvm
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export GOROOT=$HOME/go
+export PATH=$PATH:$GOROOT/bin
 export NODE_PATH="/usr/local/lib/node_modules/"
-
+export GOPATH=$HOME/mygo
+export GOOS="linux"
+export GOARCH="amd64"
