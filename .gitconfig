@@ -2,7 +2,7 @@
 	name = yinsigan
 	email = ganweiliang886@gmail.com
 [credential]
-	helper = cache --timeout=3600
+	helper = cache
 [color]
 	diff = auto
 	ui = true
