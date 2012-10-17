@@ -87,6 +87,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias vim="stty stop '' -ixoff ; vim"
+alias cr='ctags -R --languages=-javascript --exclude=.git --exclude=log --fields=+iaS --extra=+q .'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
