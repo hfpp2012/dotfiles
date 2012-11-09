@@ -126,3 +126,7 @@ export FACEBOOK_OAUTH_CLIENT="344418435643460"
 export FACEBOOK_OAUTH_SECRET="a5b7310d3ee8b54cbc607b4c356531ac"
 export GITHUB_OAUTH_CLIENT="60e146cfcaa20e6ff310"
 export GITHUB_OAUTH_SECRET="5bdd69d832fc311041d0a61622bf6a01940b6a2a"
+
+WHITE="\[\033[0m\]"  
+YELLOW="\[\033[0;33m\]"  
+export PS1="\w*$YELLOW\$(git branch 2>/dev/null | grep '^*' | colrm 1 2)$WHITE \$ "
