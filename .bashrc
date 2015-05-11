@@ -159,3 +159,5 @@ man() {
 [[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
 
 function gvim () { (/usr/bin/gvim -f "$@" &) }
+
+alias gvim="gvim 2>/dev/null"
