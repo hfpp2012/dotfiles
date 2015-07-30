@@ -1,0 +1,52 @@
+check process postgresql with pidfile /var/run/postgresql/9.3-main.pid
+   start program = "/etc/init.d/postgresql start" with timeout 60 seconds
+   stop program = "/etc/init.d/postgresql stop"
+
+check process nginx with pidfile /run/nginx.pid
+   start program = "/etc/init.d/nginx start" with timeout 60 seconds
+   stop program = "/etc/init.d/nginx stop"
+
+check process redis with pidfile /var/run/redis_6379.pid
+  start program = "/etc/init.d/redis_6379 start" with timeout 60 seconds
+  stop  program = "/etc/init.d/redis_6379 stop"
+
+# check process xy_unicorn with pidfile /home/yinsigan/xy/shared/tmp/pids/unicorn.pid
+  # if does not exist for 1 cycle
+    # then exec "/etc/monit/slack_notifications.sh"
+    # else if succeeded for 3 cycles then alert
+
+# check process xy_unicorn_staging with pidfile /home/yinsigan/xy_staging/shared/tmp/pids/unicorn.pid
+check process xy_puma with pidfile /home/yinsigan/xy/shared/pids/puma.pid
+check process xy_puma_staging with pidfile /home/yinsigan/xy_staging/shared/pids/puma.pid
+
+check process xy_sidekiq with pidfile /home/yinsigan/xy/shared/pids/sidekiq.pid
+
+check process xy_staging_sidekiq with pidfile /home/yinsigan/xy_staging/shared/pids/sidekiq.pid
+
+
+check filesystem datafs with path /dev/xvda1
+ start program  = "/bin/mount /data"
+ stop program  = "/bin/umount /data"
+ if failed permission 660 then unmonitor
+ if failed uid root then unmonitor
+ if failed gid disk then unmonitor
+ if space usage > 80% for 5 times within 15 cycles then alert
+ if space usage > 99% then stop
+ if inode usage > 30000 then alert
+ if inode usage > 99% then stop
+ group server
+ 
+ 
+ #!/usr/bin/env bash
+/usr/bin/curl \
+    -X POST \
+    -s \
+    --data-urlencode "payload={ \
+        \"channel\": \"#ruby\", \
+        \"username\": \"webhookbot\", \
+        \"pretext\": \"servername | $MONIT_DATE\", \
+        \"color\": \"danger\", \
+        \"icon_emoji\": \":ghost:\", \
+        \"text\": \"$MONIT_SERVICE - $MONIT_DESCRIPTION\" \
+    }" \
+    https://hooks.slack.com/services/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
