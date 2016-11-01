@@ -11,8 +11,7 @@
 	st = status
 	throw = reset --hard HEAD
 	ci = commit -a -v
-  co = checkout
-  br = branch
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-
-
+        co = checkout
+        br = branch
+        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+	mg = commit --file .git/MERGE_MSG
